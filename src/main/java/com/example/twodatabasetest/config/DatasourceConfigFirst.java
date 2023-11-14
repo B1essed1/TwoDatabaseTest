@@ -59,7 +59,7 @@ public class DatasourceConfigFirst {
             @Qualifier("first") DataSource dataSource) {
 
         Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.hbm2ddl.auto", "create");
         properties.put("spring.jpa.show-sql", true);
 
         return builder.dataSource(dataSource)
