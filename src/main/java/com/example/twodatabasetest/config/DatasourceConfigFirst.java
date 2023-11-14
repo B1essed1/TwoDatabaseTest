@@ -25,8 +25,8 @@ import java.util.Map;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        entityManagerFactoryRef = "customerEntityManagerFactory",
-        transactionManagerRef = "customerTransactionManager",
+        entityManagerFactoryRef = "firstFactory",
+        transactionManagerRef = "t1",
         basePackages = {
                 "com.example.twodatabasetest.first.repo"
         }
@@ -52,14 +52,14 @@ public class DatasourceConfigFirst {
     }
 
     @Primary
-    @Bean(name = "customerEntityManagerFactory")
+    @Bean(name = "firstFactory")
     public LocalContainerEntityManagerFactoryBean
     entityManagerFactory(
             EntityManagerFactoryBuilder builder,
             @Qualifier("first") DataSource dataSource) {
 
-        Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put("hibernate.hbm2ddl.auto", "create");
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("hibernate.hbm2ddl.auto", "update");
         properties.put("spring.jpa.show-sql", true);
 
         return builder.dataSource(dataSource)
@@ -72,7 +72,7 @@ public class DatasourceConfigFirst {
     @Primary
     @Bean(name = "t1")
     public PlatformTransactionManager customerTransactionManager(
-            @Qualifier("customerEntityManagerFactory") EntityManagerFactory customerEntityManagerFactory ) {
+            @Qualifier("firstFactory") EntityManagerFactory customerEntityManagerFactory ) {
         return new JpaTransactionManager(customerEntityManagerFactory);
     }
 
