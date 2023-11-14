@@ -6,6 +6,9 @@ import com.example.twodatabasetest.second.repo.SecondRepo;
 import com.example.twodatabasetest.second.entity.SecondEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Random;
 
 @Service
 public class TransactionsService {
@@ -19,9 +22,10 @@ public class TransactionsService {
 
 
     @Async
+    @Transactional("chainedTransactionManager")
     public void save(){
-        FirstEntity firstEntity = new FirstEntity("Name", 1);
-        SecondEntity secondEntity = new SecondEntity("Senisadfas", 1);
+        FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(15));
+        SecondEntity secondEntity = new SecondEntity("TransactionTestCount", new Random().nextInt(15));
         try {
             first.save(firstEntity);
         } catch (Exception e){

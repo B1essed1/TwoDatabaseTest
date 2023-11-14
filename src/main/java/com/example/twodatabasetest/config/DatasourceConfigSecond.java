@@ -58,7 +58,7 @@ public class DatasourceConfigSecond {
             @Qualifier("second") DataSource dataSource) {
 
         Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.hbm2ddl.auto", "create");
         properties.put("spring.jpa.show-sql", true);
 
         return
@@ -68,12 +68,5 @@ public class DatasourceConfigSecond {
                         .properties(properties)
                         .build();
     }
-
-    @Bean(name = "t2")
-    public PlatformTransactionManager productTransactionManager(
-            @Qualifier("secondFactory") EntityManagerFactory productEntityManagerFactory) {
-        return new JpaTransactionManager(productEntityManagerFactory);
-    }
-
 
 }

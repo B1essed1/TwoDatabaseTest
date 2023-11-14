@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@EnableTransactionManagement
 @EnableJpaRepositories(
         entityManagerFactoryRef = "firstFactory",
         transactionManagerRef = "t1",
@@ -59,7 +58,7 @@ public class DatasourceConfigFirst {
             @Qualifier("first") DataSource dataSource) {
 
         Map<String, Object> properties = new HashMap<>();
-        properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.hbm2ddl.auto", "create");
         properties.put("spring.jpa.show-sql", true);
 
         return builder.dataSource(dataSource)
@@ -69,11 +68,5 @@ public class DatasourceConfigFirst {
                 .build();
     }
 
-    @Primary
-    @Bean(name = "t1")
-    public PlatformTransactionManager customerTransactionManager(
-            @Qualifier("firstFactory") EntityManagerFactory customerEntityManagerFactory ) {
-        return new JpaTransactionManager(customerEntityManagerFactory);
-    }
 
 }

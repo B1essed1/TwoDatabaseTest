@@ -16,6 +16,8 @@ public class FirstEntity  {
     protected Long id;
 
     private String data;
+
+    @Column(unique = true)
     private Integer count;
 
     public FirstEntity(String data, Integer count) {
