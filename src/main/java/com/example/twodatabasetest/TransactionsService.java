@@ -6,6 +6,7 @@ import com.example.twodatabasetest.second.repo.SecondRepo;
 import com.example.twodatabasetest.second.entity.SecondEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Random;
@@ -21,8 +22,7 @@ public class TransactionsService {
     }
 
 
-    @Async
-    @Transactional("chainedTransactionManager")
+    @Transactional(value = "chainedTransactionManager", propagation = Propagation.REQUIRED)
     public void save(){
         FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(15));
         SecondEntity secondEntity = new SecondEntity("TransactionTestCount", new Random().nextInt(15));
@@ -31,10 +31,29 @@ public class TransactionsService {
         } catch (Exception e){
             System.out.println(e);
         }
-
-        try {
+        try{
             second.save(secondEntity);
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+
+    @Transactional(value = "chainedTransactionManager", propagation = Propagation.REQUIRED)
+    public void save(int i){
+        FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(15));
+        SecondEntity secondEntity = new SecondEntity("TransactionTestCount", new Random().nextInt(15));
+        if (i == 2) throw new NullPointerException();
+        try {
+            first.save(firstEntity);
         } catch (Exception e){
+            System.out.println(e);
+        }
+        try{
+            second.save(secondEntity);
+
+        }catch (Exception e){
             System.out.println(e);
         }
     }

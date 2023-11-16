@@ -1,7 +1,9 @@
 package com.example.twodatabasetest.config;
 
 
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
@@ -49,6 +51,7 @@ public class DatasourceConfigSecond {
         dataSource.setUsername(env.getProperty("db2.datasource.second.username"));
         dataSource.setPassword(env.getProperty("db2.datasource.second.password"));
         return dataSource;
+
     }
 
     @Bean(name = "secondFactory")

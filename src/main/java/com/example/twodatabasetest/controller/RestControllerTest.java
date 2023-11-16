@@ -17,9 +17,9 @@ public class RestControllerTest {
 
     @GetMapping
     ResponseEntity<?> test() {
-        for (int i = 0; i <200 ; i++) {
-            service.save();
+        for (int i = 0; i < 100; i++) {
+                 service.save();
         }
-        return ResponseEntity.ok("success");
+        return ResponseEntity.ok("f*ck");
     }
 }
