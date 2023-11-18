@@ -22,7 +22,7 @@ public class TransactionsService {
     }
 
 
-    @Transactional(value = "chainedTransactionManager", propagation = Propagation.REQUIRED)
+   // @Transactional(value = "chainedTransactionManager", propagation = Propagation.REQUIRED)
     public void save(){
         FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(15));
         SecondEntity secondEntity = new SecondEntity("TransactionTestCount", new Random().nextInt(15));
@@ -40,7 +40,7 @@ public class TransactionsService {
     }
 
 
-    @Transactional(value = "chainedTransactionManager", propagation = Propagation.REQUIRED)
+ //   @Transactional(value = "chainedTransactionManager", propagation = Propagation.REQUIRED)
     public void save(int i){
         FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(15));
         SecondEntity secondEntity = new SecondEntity("TransactionTestCount", new Random().nextInt(15));

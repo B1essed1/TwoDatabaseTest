@@ -17,7 +17,7 @@ import javax.persistence.EntityManagerFactory;
 @Configuration
 public class TransactionManager {
 
-
+/*
     @Primary
     @Bean(name = "t1")
     public PlatformTransactionManager firstTransactionManager(
@@ -36,5 +36,5 @@ public class TransactionManager {
             @Qualifier("t1") PlatformTransactionManager firstTransactionManager,
             @Qualifier("t2") PlatformTransactionManager secondTransactionManager) {
         return new ChainedTransactionManager(firstTransactionManager, secondTransactionManager);
-    }
+    }*/
 }

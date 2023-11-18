@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:15
+    container_name: first_db
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_USER=blessed
+      - POSTGRES_DB=first_db
+
+  db2:
+    image: postgres:15
+    container_name: second_db
+    ports:
+      - "5435:5432"
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_USER=blessed
+      - POSTGRES_DB=second_db
