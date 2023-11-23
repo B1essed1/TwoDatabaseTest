@@ -16,10 +16,8 @@ import javax.persistence.EntityManagerFactory;
 @EnableTransactionManagement()
 @Configuration
 public class TransactionManager {
-
-
-    @Primary
     @Bean(name = "t1")
+    @Primary
     public PlatformTransactionManager firstTransactionManager(
             @Qualifier("firstFactory") EntityManagerFactory customerEntityManagerFactory ) {
         return new JpaTransactionManager(customerEntityManagerFactory);

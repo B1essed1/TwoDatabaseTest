@@ -21,6 +21,7 @@ public class SecondEntity  {
     protected Long id;
 
     private String data;
+    @Column(unique = true)
     private Integer count;
 
     public SecondEntity(String data, Integer count) {

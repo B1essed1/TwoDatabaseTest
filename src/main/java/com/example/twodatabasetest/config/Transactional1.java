@@ -12,8 +12,8 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Transactional(value = "t2")
-public @interface Transactional2 {
+@Transactional(value = "t1")
+public @interface Transactional1 {
 
     @AliasFor(
             annotation = Transactional.class

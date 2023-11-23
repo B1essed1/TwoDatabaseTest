@@ -2,6 +2,8 @@ package com.example.twodatabasetest.config;
 
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.hibernate.BaseSessionEventListener;
+import org.hibernate.cfg.AvailableSettings;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -23,6 +25,7 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
@@ -64,12 +67,22 @@ public class DatasourceConfigSecond {
         properties.put("hibernate.hbm2ddl.auto", "create");
         properties.put("spring.jpa.show-sql", true);
 
-        return
-                builder.dataSource(dataSource)
+
+        LocalContainerEntityManagerFactoryBean managerFactoryBean =    builder.dataSource(dataSource)
                         .packages("com.example.twodatabasetest.second.entity")
                         .persistenceUnit("second_db")
                         .properties(properties)
                         .build();
+
+        managerFactoryBean.setJpaProperties(getProperties());
+        return managerFactoryBean;
+    }
+
+
+    Properties getProperties() {
+        Properties properties = new Properties();
+        properties.put(AvailableSettings.AUTO_SESSION_EVENTS_LISTENER, BaseSessionEventListener.class.getName());
+        return properties;
     }
 
 }

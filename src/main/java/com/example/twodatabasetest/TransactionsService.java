@@ -1,14 +1,19 @@
 package com.example.twodatabasetest;
 
+import com.example.twodatabasetest.config.ApiResponse;
+import com.example.twodatabasetest.config.Transactional2;
 import com.example.twodatabasetest.first.entity.FirstEntity;
 import com.example.twodatabasetest.first.repo.FirstRepo;
+import com.example.twodatabasetest.first.service.FirstService;
 import com.example.twodatabasetest.second.repo.SecondRepo;
 import com.example.twodatabasetest.second.entity.SecondEntity;
-import org.springframework.scheduling.annotation.Async;
+import com.example.twodatabasetest.second.service.SecondService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityTransaction;
+import java.sql.SQLException;
 import java.util.Random;
 
 @Service
@@ -16,45 +21,86 @@ public class TransactionsService {
     private final FirstRepo first;
     private final SecondRepo second;
 
-    public TransactionsService( FirstRepo first, SecondRepo second) {
+    private final FirstService firstService;
+    private final SecondService secondService;
+
+    public TransactionsService(FirstRepo first, SecondRepo second, FirstService firstService, SecondService secondService) {
         this.first = first;
         this.second = second;
+        this.firstService = firstService;
+        this.secondService = secondService;
     }
 
 
-    @Transactional(value = "chainedTransactionManager", propagation = Propagation.REQUIRED)
-    public void save(){
-        FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(15));
-        SecondEntity secondEntity = new SecondEntity("TransactionTestCount", new Random().nextInt(15));
-        try {
-            first.save(firstEntity);
-        } catch (Exception e){
-            System.out.println(e);
-        }
-        try{
-            second.save(secondEntity);
+    @Transactional(value = "t2",propagation = Propagation.REQUIRES_NEW)
+//    @Transactional2(propagation = Propagation.REQUIRES_NEW)
+    public void save() {
+        alfa();
+        FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(35));
+        SecondEntity secondEntity = new SecondEntity("TransactionTestCount", new Random().nextInt(34));
+        System.out.println("worked");
 
-        }catch (Exception e){
-            System.out.println(e);
-        }
+
+        System.out.println("worked 22");
+        second.save(secondEntity);
+     //   first.save(firstEntity);
+
+
+    }
+
+    private void alfa() {
+        FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(25));
+        SecondEntity secondEntity = new SecondEntity("TransactionTestCount", new Random().nextInt(30));
+        System.out.println("worked");
+
+   //     first.save(firstEntity);
+
+
+        System.out.println("worked 22");
+        second.save(secondEntity);
     }
 
 
-    @Transactional(value = "chainedTransactionManager", propagation = Propagation.REQUIRED)
-    public void save(int i){
+    public void save(int i) {
         FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(15));
         SecondEntity secondEntity = new SecondEntity("TransactionTestCount", new Random().nextInt(15));
         if (i == 2) throw new NullPointerException();
         try {
             first.save(firstEntity);
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
-        try{
+        try {
             second.save(secondEntity);
-
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
-    }
+    }/*
+    public void customSave() throws SQLException {
+        FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(15));
+        SecondEntity secondEntity = new SecondEntity("TransactionTestCount", new Random().nextInt(15));
+        ApiResponse response1 = new ApiResponse();
+        ApiResponse response2 = new ApiResponse();
+
+        try {
+          response1 = firstService.saveFirst(firstEntity);
+        } catch (Exception e) {
+            response1.setSuccess(false);
+        }
+        try {
+         response2 = secondService.saveSecond(secondEntity);
+        } catch (Exception e) {
+            response2.setSuccess(false);
+        }
+
+        if (!response1.isSuccess()|| !response2.isSuccess()){
+            try {
+                response1.getRes().rollback();
+                response2.getRes().rollback();
+            } catch (Exception e){
+
+            }
+        }
+
+    }*/
 }

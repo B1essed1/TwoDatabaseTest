@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLException;
+
 @RestController
 @RequestMapping("api/test")
 public class RestControllerTest {
@@ -16,7 +18,7 @@ public class RestControllerTest {
     }
 
     @GetMapping
-    ResponseEntity<?> test() {
+    ResponseEntity<?> test() throws SQLException {
         for (int i = 0; i < 100; i++) {
                  service.save();
         }
