@@ -35,7 +35,7 @@ public class TransactionsService {
 
 //    @Transactional(value = "t2",propagation = Propagation.REQUIRES_NEW)
 //    @Transactional2(propagation = Propagation.REQUIRES_NEW, rollbackFor = Throwable.class)
-    @Transactional1
+    @Transactional2
     public void save() {
 //        alfa();
         FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(35));

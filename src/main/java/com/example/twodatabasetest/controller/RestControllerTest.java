@@ -1,6 +1,7 @@
 package com.example.twodatabasetest.controller;
 
 import com.example.twodatabasetest.TransactionsService;
+import com.example.twodatabasetest.TransactionsServiceMain;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +12,9 @@ import java.sql.SQLException;
 @RestController
 @RequestMapping("api/test")
 public class RestControllerTest {
-    private final TransactionsService service;
+    private final TransactionsServiceMain service;
 
-    public RestControllerTest(TransactionsService service) {
+    public RestControllerTest(TransactionsServiceMain service) {
         this.service = service;
     }
 
