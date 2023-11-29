@@ -1,6 +1,7 @@
 package com.example.twodatabasetest;
 
 import com.example.twodatabasetest.config.ApiResponse;
+import com.example.twodatabasetest.config.Transactional1;
 import com.example.twodatabasetest.config.Transactional2;
 import com.example.twodatabasetest.first.entity.FirstEntity;
 import com.example.twodatabasetest.first.repo.FirstRepo;
@@ -32,33 +33,30 @@ public class TransactionsService {
     }
 
 
-    @Transactional(value = "t2",propagation = Propagation.REQUIRES_NEW)
-//    @Transactional2(propagation = Propagation.REQUIRES_NEW)
+//    @Transactional(value = "t2",propagation = Propagation.REQUIRES_NEW)
+    @Transactional2(propagation = Propagation.REQUIRES_NEW, rollbackFor = Throwable.class)
+    @Transactional1(propagation = Propagation.REQUIRES_NEW, rollbackFor = Throwable.class)
     public void save() {
-        alfa();
+//        alfa();
         FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(35));
         SecondEntity secondEntity = new SecondEntity("TransactionTestCount", new Random().nextInt(34));
-        System.out.println("worked");
 
-
-        System.out.println("worked 22");
+        first.save(firstEntity);
         second.save(secondEntity);
-     //   first.save(firstEntity);
-
 
     }
 
-    private void alfa() {
-        FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(25));
-        SecondEntity secondEntity = new SecondEntity("TransactionTestCount", new Random().nextInt(30));
-        System.out.println("worked");
-
-   //     first.save(firstEntity);
-
-
-        System.out.println("worked 22");
-        second.save(secondEntity);
-    }
+//    private void alfa() {
+//        FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(25));
+//        SecondEntity secondEntity = new SecondEntity("TransactionTestCount", new Random().nextInt(30));
+//        System.out.println("worked");
+//
+//        first.save(firstEntity);
+//
+//
+//        System.out.println("worked 22");
+//        second.save(secondEntity);
+//    }
 
 
     public void save(int i) {

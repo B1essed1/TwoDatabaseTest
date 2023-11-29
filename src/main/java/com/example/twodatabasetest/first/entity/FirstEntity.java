@@ -17,7 +17,7 @@ public class FirstEntity  {
 
     private String data;
 
-    @Column(unique = true)
+//    @Column(unique = true)
     private Integer count;
 
     public FirstEntity(String data, Integer count) {
