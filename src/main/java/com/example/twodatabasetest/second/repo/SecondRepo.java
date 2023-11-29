@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 //@Transactional(value = "t2", propagation = Propagation.SUPPORTS)
-@Transactional2(propagation = Propagation.SUPPORTS)
+//@Transactional2(propagation = Propagation.SUPPORTS)
 public interface SecondRepo extends JpaRepository<SecondEntity, Long> {
     @Override
 //    @Transactional(value = "t2")

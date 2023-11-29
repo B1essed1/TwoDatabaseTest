@@ -20,6 +20,11 @@ public @interface Transactional2 {
     @AliasFor(
             annotation = Transactional.class
     )
+    String value() default "";
+
+    @AliasFor(
+            annotation = Transactional.class
+    )
     Propagation propagation() default Propagation.REQUIRED;
 
     @AliasFor(

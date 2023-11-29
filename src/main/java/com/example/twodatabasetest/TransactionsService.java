@@ -1,7 +1,6 @@
 package com.example.twodatabasetest;
 
 import com.example.twodatabasetest.config.ApiResponse;
-import com.example.twodatabasetest.config.Transactional1;
 import com.example.twodatabasetest.config.Transactional2;
 import com.example.twodatabasetest.first.entity.FirstEntity;
 import com.example.twodatabasetest.first.repo.FirstRepo;
@@ -10,10 +9,7 @@ import com.example.twodatabasetest.second.repo.SecondRepo;
 import com.example.twodatabasetest.second.entity.SecondEntity;
 import com.example.twodatabasetest.second.service.SecondService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityTransaction;
 import java.sql.SQLException;
 import java.util.Random;
 

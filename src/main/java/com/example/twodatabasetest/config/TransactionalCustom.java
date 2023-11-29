@@ -6,16 +6,19 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
+@Repeatable(Transactionals.class)
 @Component
-@Transactional(value = "t1")
-public @interface Transactional1 {
+@Transactional
+public @interface TransactionalCustom {
+
+    @AliasFor(
+            annotation = Transactional.class
+    )
+    String value() default "";
 
     @AliasFor(
             annotation = Transactional.class

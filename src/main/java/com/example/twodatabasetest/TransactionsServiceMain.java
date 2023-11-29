@@ -1,8 +1,7 @@
 package com.example.twodatabasetest;
 
-import com.example.twodatabasetest.config.Transactional1;
+import com.example.twodatabasetest.config.TransactionalCustom;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 
 @Service
 public class TransactionsServiceMain {
@@ -13,7 +12,7 @@ public class TransactionsServiceMain {
         this.transactionsService = transactionsService;
     }
 
-    @Transactional1
+    @TransactionalCustom
     public void save() {
         transactionsService.save();
     }
