@@ -75,7 +75,8 @@ public class TransactionsService {
         } catch (Exception e) {
             System.out.println(e);
         }
-    }/*
+    }
+
     public void customSave() throws SQLException {
         FirstEntity firstEntity = new FirstEntity("Transactiontest", new Random().nextInt(15));
         SecondEntity secondEntity = new SecondEntity("TransactionTestCount", new Random().nextInt(15));
@@ -88,7 +89,7 @@ public class TransactionsService {
             response1.setSuccess(false);
         }
         try {
-         response2 = secondService.saveSecond(secondEntity);
+       //  response2 = secondService.saveSecond(secondEntity);
         } catch (Exception e) {
             response2.setSuccess(false);
         }
@@ -102,5 +103,5 @@ public class TransactionsService {
             }
         }
 
-    }*/
+    }
 }
